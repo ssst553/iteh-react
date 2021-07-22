@@ -29,6 +29,15 @@ const deleteMeal = (id)=> {
  setMeals(meals.filter((meal)=>meal.id !== id))
 }
 
+//Toggle Reminder
+const toggleReminder =(id)=> {
+  setMeals(
+    meals.map((meal)=>
+    meal.id===id ? {...meal, reminder:
+      !meal.reminder} :meal)
+  )
+  
+}
 
 
 // <Meals meals={meals} onDelete={deleteMeal}/>
@@ -36,7 +45,8 @@ const deleteMeal = (id)=> {
     <div className="container">
      <Header />
     {meals.length >0 ? (
-      <Meals meals ={meals} onDelete={deleteMeal}/>
+      <Meals meals ={meals} onDelete={deleteMeal}
+      onToggle={toggleReminder}/>
     ) : (
       'No Meals To Show'
     )}
