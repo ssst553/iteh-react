@@ -2,6 +2,9 @@ import Header from './components/Header'
 import Meals from './components/Meals'
 import {useState, useEffect} from 'react'
 import AddMeal from './components/AddMeal'
+import Footer from './components/Footer'
+import Links from './components/Links'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 const App = () => {
 
 const[showAddMeal, setShowAddMeal]=useState(false)
@@ -78,26 +81,32 @@ const res = await fetch(`http://localhost:5000/meals/${id}`, {
   
 }
 
-
-// <Meals meals={meals} onDelete={deleteMeal}/>
   return (
+    <Router>
     <div className="container">
      <Header onAdd ={() => setShowAddMeal
        (!showAddMeal)}
        showAdd={showAddMeal}
        />
-     {showAddMeal && <AddMeal onAdd={addMeal} />}
+    <Route path='/' exact render={(props)=> (
+      <>
+       {showAddMeal && <AddMeal onAdd={addMeal} />}
 
-    {meals.length >0 ? (
-      <Meals meals ={meals} onDelete={deleteMeal}
-      onToggle={toggleReminder}/>
-    ) : (
-      'No Meals To Show'
-    )}
+{meals.length >0 ? (
+  <Meals meals ={meals} onDelete={deleteMeal}
+  onToggle={toggleReminder}/>
+) : (
+  'No Meals To Show'
+)}
+
+      </>
+    ) }/>
+      <Route path='/links' component={Links}/>
+    <Footer />
 
     </div>
+    </Router>
   )
 }
 
-//provjeriti da li on ovo ima opet sam rfce umjesto rafce koristila
 export default App
