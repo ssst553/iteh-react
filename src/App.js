@@ -1,7 +1,10 @@
 import Header from './components/Header'
 import Meals from './components/Meals'
 import {useState} from 'react'
-function App() {
+import AddMeal from './components/AddMeal'
+const App = () => {
+
+const[showAddMeal, setShowAddMeal]=useState(false)
 
   const [meals, setMeals] =useState([
     {
@@ -24,7 +27,15 @@ function App() {
      },
 ])
 
-//Delete Meal
+//Add a meal
+const addMeal=(meal)=> {
+ const id = Math.floor(Math.random()*10000)+1 //random number za id
+ const newMeal = {id,...meal}
+ setMeals([...meals, newMeal])
+}
+
+
+//Delete a Meal
 const deleteMeal = (id)=> {
  setMeals(meals.filter((meal)=>meal.id !== id))
 }
@@ -43,7 +54,12 @@ const toggleReminder =(id)=> {
 // <Meals meals={meals} onDelete={deleteMeal}/>
   return (
     <div className="container">
-     <Header />
+     <Header onAdd ={() => setShowAddMeal
+       (!showAddMeal)}
+       showAdd={showAddMeal}
+       />
+     {showAddMeal && <AddMeal onAdd={addMeal} />}
+
     {meals.length >0 ? (
       <Meals meals ={meals} onDelete={deleteMeal}
       onToggle={toggleReminder}/>
@@ -55,4 +71,5 @@ const toggleReminder =(id)=> {
   )
 }
 
+//provjeriti da li on ovo ima opet sam rfce umjesto rafce koristila
 export default App;
