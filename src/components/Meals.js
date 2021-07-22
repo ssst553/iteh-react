@@ -14,7 +14,7 @@ const Meals = ({meals, onDelete,onToggle}) => {
               />
             ))} 
         </>
-    )
+    )         
 }
 
 export default Meals

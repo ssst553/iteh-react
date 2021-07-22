@@ -1,51 +1,79 @@
 import Header from './components/Header'
 import Meals from './components/Meals'
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import AddMeal from './components/AddMeal'
 const App = () => {
 
 const[showAddMeal, setShowAddMeal]=useState(false)
+const [meals, setMeals] =useState([])
 
-  const [meals, setMeals] =useState([
-    {
-    id:1,
-    text: 'Chicken Piccata Pasta',
-    day: 'July 22nd at 6:15pm',
-    reminder: true,
-    },
-    {
-    id:2,
-    text: 'Lime Beef and Basil Stir Fry',
-    day: 'July 23rd at 6:15pm',
-    reminder: true,
-    },
-    {
-    id:3,
-    text: 'Thai Chicken Coconut and Rice',
-    day: 'July 24th at 6:15pm',
-    reminder: false,
-     },
-])
+useEffect(()=> {
+ const getMeals=async ()=> {
+   const mealsFromServer = await fetchMeals()
+   setMeals(mealsFromServer)
+ }
+  getMeals()
+},[])
+
+//Fetch Meals
+const fetchMeals = async() => {
+  const res = await fetch('http://localhost:5000/meals')
+  const data = await res.json()
+  return data
+}
+
+//Fetch a Meal
+const fetchMeal = async(id) => {
+  const res = await fetch(`http://localhost:5000/meals/${id}`)
+  const data = await res.json()
+
+  return data
+}
+
 
 //Add a meal
-const addMeal=(meal)=> {
- const id = Math.floor(Math.random()*10000)+1 //random number za id
- const newMeal = {id,...meal}
- setMeals([...meals, newMeal])
+const addMeal=async (meal)=> {
+ const res = await fetch('http://localhost:5000/meals', {
+   method:'POST',
+   headers: {
+     'Content-type': 'application/json',
+   },
+   body: JSON.stringify(meal),
+ })
+ const data = await res.json()
+
+ setMeals([...meals,data])
 }
 
 
 //Delete a Meal
-const deleteMeal = (id)=> {
- setMeals(meals.filter((meal)=>meal.id !== id))
+const deleteMeal = async(id)=> {
+ await fetch(`http://localhost:5000/meals/${id}`, {
+   method:'DELETE',
+ })
+
+ setMeals(meals.filter((meal)=> meal.id !== id))
 }
 
 //Toggle Reminder
-const toggleReminder =(id)=> {
+const toggleReminder =async (id)=> {
+  const mealToToggle = await fetchMeal(id)
+  const updMeal = { ...mealToToggle,
+  reminder: !mealToToggle.reminder}
+
+const res = await fetch(`http://localhost:5000/meals/${id}`, {
+  method:'PUT',
+  headers: {
+    'Content-type': 'application/json'
+  },
+  body:JSON.stringify(updMeal)
+})
+  const data = await res.json()
+
   setMeals(
     meals.map((meal)=>
     meal.id===id ? {...meal, reminder:
-      !meal.reminder} :meal)
+      data.reminder} :meal)
   )
   
 }
@@ -72,4 +100,4 @@ const toggleReminder =(id)=> {
 }
 
 //provjeriti da li on ovo ima opet sam rfce umjesto rafce koristila
-export default App;
+export default App

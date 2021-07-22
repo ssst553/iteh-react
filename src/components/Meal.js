@@ -15,6 +15,6 @@ const Meal = ({meal, onDelete, onToggle}) => {
             <p>{meal.day}</p>
         </div>
     )
-}
+}        
 
 export default Meal

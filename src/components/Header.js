@@ -11,7 +11,7 @@ const Header = ({title,onAdd, showAdd}) => {
             
         </header>
     )
-}
+}           
 
 Header.defaultProps = {
     title: 'Meal Planner',

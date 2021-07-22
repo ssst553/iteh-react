@@ -1,0 +1,16 @@
+{
+  "meals": [
+    {
+      "id": 1,
+      "text": "Chicken Piccata Pasta",
+      "day": "July 22nd at 6:15pm",
+      "reminder": true
+    },
+    {
+      "id": 2,
+      "text": "Lime Beef and Basil Stir Fry",
+      "day": "July 23rd at 6:15pm",
+      "reminder": true
+    }
+  ]
+}

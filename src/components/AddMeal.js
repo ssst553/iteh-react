@@ -1,6 +1,6 @@
 import {useState} from 'react'
 
-const AddMeal = ({onAdd}) => {
+const AddMeal = ({onAdd}) => {    
 
 const [text,setText] =useState('')
 const [day,setDay] =useState('')
