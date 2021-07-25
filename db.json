@@ -1,16 +1,34 @@
 {
   "meals": [
     {
-      "id": 1,
-      "text": "Chicken Piccata Pasta",
-      "day": "July 22nd at 6:15pm",
-      "reminder": true
-    },
-    {
       "id": 2,
       "text": "Lime Beef and Basil Stir Fry",
       "day": "July 23rd at 6:15pm",
       "reminder": true
+    },
+    {
+      "text": "asd",
+      "day": "asdy",
+      "reminder": false,
+      "id": 3
+    },
+    {
+      "text": " Chicken Piccata Pasta",
+      "day": "July 23rd at 3:15pm",
+      "reminder": true,
+      "id": 4
+    },
+    {
+      "text": "Lime Beef and Basil Stir Fry",
+      "day": "July 25rd at 6:15pm",
+      "reminder": false,
+      "id": 5
+    },
+    {
+      "text": "Lime Beef and Basil Stir Fry",
+      "day": "July 27rd at 6:15pm",
+      "reminder": false,
+      "id": 6
     }
   ]
 }

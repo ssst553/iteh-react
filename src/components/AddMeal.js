@@ -27,6 +27,7 @@ const onSubmit = (e) => {
                 <label>Meal</label>
                 <input type ='text' 
                 placeholder='Add a Meal'
+                maxLength="30"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
                 />
@@ -35,6 +36,7 @@ const onSubmit = (e) => {
                 <label>Day & Time</label>
                 <input type ='day' 
                 placeholder='Add Day & Time'
+                maxLength="20"
                 value={day}
                 onChange={(e) => setDay(e.target.value)}
                 />
